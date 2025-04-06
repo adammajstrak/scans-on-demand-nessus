@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ScansOnDemandNessus.Server.Models;
 using ScansOnDemandNessus.Server.Services;
+using System.Text.Json;
 
 namespace ScansOnDemandNessus.Server.Controllers
 {
@@ -16,10 +18,42 @@ namespace ScansOnDemandNessus.Server.Controllers
             return scans;
         }
 
-        [HttpPost("nessus/scans")]
-        public void CreateScan()
+        [HttpPost("settings")]
+        public void SaveSettings([FromBody] Models.ScanSettings scanSettings)
         {
-            _scansService.CreateBasicNetworkScan();
+            _databaseService.SaveSettings(scanSettings);
+        }
+
+        [HttpGet("settings")]
+        public IEnumerable<string> GetHosts()
+        {
+            return _databaseService.GetHosts();
+        }
+
+        [HttpGet("nessus/plugins")]
+        public IEnumerable<string> GetAllPlugins()
+        {
+            var plugins = _scansService.GetPlugins();
+            return plugins;
+        }
+
+        [HttpPost("nessus/scans")]
+        public void CreateScan([FromBody] Models.Host host)
+        {
+            var scanParameters = _databaseService.GetSettings(host.Name);
+            _scansService.CreateScan(scanParameters);
+        }
+
+        [HttpPost("nessus/scans/schedule")]
+        public void ScheduleScan([FromBody] Models.Host host)
+        {
+            _scansService.ScheduleScan(host.Name);
+        }
+
+        [HttpPost("nessus/scans/run")]
+        public void RunScheduledScans()
+        {
+            _scansService.RunScheduledScans();
         }
 
         [HttpPost("nessus/scans/load")]

@@ -48,6 +48,8 @@ static void GetConfig()
     AppSettings.AddressBase = configuration.GetSection("AppSettings:AddressBase").Value;
     AppSettings.User = configuration.GetSection("AppSettings:User").Value;
     AppSettings.Password = configuration.GetSection("AppSettings:Password").Value;
-    AppSettings.NetworkScanUuid = configuration.GetSection("AppSettings:NetworkScanUuid").Value;
+    AppSettings.TemplateUuid = configuration.GetSection("AppSettings:TemplateUuid").Value;
     AppSettings.DatabaseConnectionString = configuration.GetSection("AppSettings:DatabaseConnectionString").Value;
+    AppSettings.AccessKey = configuration.GetSection("AppSettings:AccessKey").Value;
+    AppSettings.SecretKey = configuration.GetSection("AppSettings:SecretKey").Value;
 }

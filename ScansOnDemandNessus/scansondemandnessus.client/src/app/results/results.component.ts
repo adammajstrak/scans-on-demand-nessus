@@ -6,6 +6,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
+  styleUrls: ['./results.component.css'],
   standalone: false
 })
 export class ResultsComponent {

@@ -2,6 +2,8 @@
 using ScansOnDemandNessus.Server.DTO;
 using Microsoft.Data.SqlClient;
 using System.Globalization;
+using ScansOnDemandNessus.Server.Models;
+using System.Text.Json;
 
 namespace ScansOnDemandNessus.Server.Services
 {
@@ -44,6 +46,55 @@ namespace ScansOnDemandNessus.Server.Services
             using (var conn = new SqlConnection(Settings.AppSettings.DatabaseConnectionString))
             {
                 conn.Execute("Delete FROM [Nessus].[dbo].[ScanResuls] where Id = @id", new { id });
+            }
+        }
+
+        public void SaveSettings(ScanSettings scanSettings)
+        {
+            using (var conn = new SqlConnection(Settings.AppSettings.DatabaseConnectionString))
+            {
+                var res = conn.Query("SELECT * FROM [Nessus].[dbo].[ScanSettings] WHERE HostName = @hostName", 
+                    new { hostName = scanSettings.Host });
+
+                if(res.Any())
+                {
+                    conn.Execute("UPDATE [dbo].[ScanSettings] " +
+                        "SET [Login] = @login,[Password] = @password ,[Plugins] = @plugins " +
+                        "WHERE [HostName] = @hostName", new
+                       {
+                           hostName = scanSettings.Host,
+                           login = scanSettings.Login,
+                           password = scanSettings.Password,
+                           plugins = JsonSerializer.Serialize(scanSettings.Plugins)
+                       });
+                } 
+                else
+                {
+                    conn.Execute("INSERT INTO [dbo].[ScanSettings] ([HostName],[Login],[Password],[Plugins]) " +
+                        "VALUES (@hostName, @login, @password, @plugins)", new
+                        {
+                            hostName = scanSettings.Host,
+                            login = scanSettings.Login,
+                            password = scanSettings.Password,
+                            plugins = JsonSerializer.Serialize(scanSettings.Plugins)
+                        });
+                }
+            }
+        }
+
+        public IEnumerable<string> GetHosts()
+        {
+            using (var conn = new SqlConnection(Settings.AppSettings.DatabaseConnectionString))
+            {
+                return conn.Query<string>("SELECT [HostName] FROM [Nessus].[dbo].[ScanSettings]");
+            }
+        }
+
+        public ScanParameters GetSettings(string hostName)
+        {
+            using (var conn = new SqlConnection(Settings.AppSettings.DatabaseConnectionString))
+            {
+                return conn.Query<ScanParameters>("SELECT [HostName], [Login], [Password], [Plugins] FROM [Nessus].[dbo].[ScanSettings] WHERE [HostName] = @hostName", new { hostName }).FirstOrDefault();
             }
         }
     }

@@ -18,5 +18,14 @@ namespace ScansOnDemandNessus.Server.JsonMappers
 
             return scansModel;
         }
+
+        public static IEnumerable<string> MapPluginsResponse(this string jsonResponse)
+        {
+            var scansResponse = JsonSerializer.Deserialize<PluginsReponse>(jsonResponse);
+
+            var plugins = scansResponse.Families?.Select(x => x.Name);
+
+            return plugins;
+        }
     }
 }

@@ -17,30 +17,10 @@ namespace ScansOnDemandNessus.Server.Services
 
             var client =  new HttpClient(handler);
 
-            var token = GetToken(client);
-
-            client.DefaultRequestHeaders.Remove("X-Cookie");
-            client.DefaultRequestHeaders.Add("X-Cookie", "token=" + token);
+            client.DefaultRequestHeaders.Remove("X-ApiKeys");
+            client.DefaultRequestHeaders.Add("X-ApiKeys",$"accessKey={AppSettings.AccessKey}; secretKey={AppSettings.SecretKey}");
 
             return client;
-        }
-
-
-        private string GetToken(HttpClient client)
-        {
-            var body = new
-            {
-                username = AppSettings.User,
-                password = AppSettings.Password
-            };
-
-            using HttpResponseMessage response = client.PostAsync(AppSettings.AddressBase + "/session", HttpUtils.CreateBody(body)).Result;
-
-            response.EnsureSuccessStatusCode();
-
-            var jsonResponse = response.Content.ReadAsStringAsync().Result;
-
-            return jsonResponse.MapTokenResponse();
         }
     }
 }

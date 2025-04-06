@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Hosting;
+using ScansOnDemandNessus.Server.Services;
 using ScansOnDemandNessus.Server.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,9 @@ builder.Services.AddCors(options =>
     });
 });
 
+
 builder.Services.AddControllers();
+builder.Services.AddHostedService<ScanRunner>();
 GetConfig();
 builder.Services.AddOpenApi();
 
@@ -52,4 +56,5 @@ static void GetConfig()
     AppSettings.DatabaseConnectionString = configuration.GetSection("AppSettings:DatabaseConnectionString").Value;
     AppSettings.AccessKey = configuration.GetSection("AppSettings:AccessKey").Value;
     AppSettings.SecretKey = configuration.GetSection("AppSettings:SecretKey").Value;
+    AppSettings.RunScanEveryMinutes = int.Parse(configuration.GetSection("AppSettings:RunScanEveryMinutes").Value);
 }

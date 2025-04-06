@@ -9,5 +9,6 @@
         public static string DatabaseConnectionString;
         public static string AccessKey;
         public static string SecretKey;
+        public static int RunScanEveryMinutes;
     }
 }

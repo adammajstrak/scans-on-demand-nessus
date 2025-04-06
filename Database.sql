@@ -1,5 +1,6 @@
 USE [master]
 GO
+/****** Object:  Database [Nessus]    Script Date: 4/6/2025 9:14:30 AM ******/
 CREATE DATABASE [Nessus]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -79,7 +80,7 @@ ALTER DATABASE [Nessus] SET QUERY_STORE = OFF
 GO
 USE [Nessus]
 GO
-/****** Object:  Table [dbo].[ScanResuls]    Script Date: 2023-12-21 8:49:34 PM ******/
+/****** Object:  Table [dbo].[ScanResuls]    Script Date: 4/6/2025 9:14:30 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -93,6 +94,22 @@ CREATE TABLE [dbo].[ScanResuls](
  CONSTRAINT [PK_ScanResuls] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ScanSettings]    Script Date: 4/6/2025 9:14:30 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ScanSettings](
+	[HostName] [nvarchar](200) NOT NULL,
+	[Login] [nvarchar](200) NOT NULL,
+	[Password] [nvarchar](200) NOT NULL,
+	[Plugins] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_ScanSettings] PRIMARY KEY CLUSTERED 
+(
+	[HostName] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO

@@ -1,0 +1,32 @@
+<h1 id="tableLabel">Scans</h1>
+
+<div class="d-flex mb-4">
+  <select class="form-select select" aria-label="Default select example" [(ngModel)]="selectedHost">
+    <option value="{{host}}" *ngFor="let host of hosts">{{host}}</option>
+  </select>
+  <button [disabled]="!canCreateScan || !selectedHost" type="button" class="btn btn-primary create-button" (click)="createScan()">Create scan</button>
+  <button [disabled]="!canCreateScan || !selectedHost" type="button" class="btn btn-primary create-button" (click)="scheduleScan()">Schedule scan</button>
+  <button type="button" class="btn btn-primary create-button" (click)="runScheduledScans()">Run scheduled scan</button>
+</div>
+
+
+<p *ngIf="!scans?.length"><em>-</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="scans.length">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let scan of scans">
+      <td>{{ scan.id }}</td>
+      <td>{{ scan.name }}</td>
+      <td>{{ scan.status }}</td>
+      <td><button [disabled]="scan.status != 'completed' || !canDownload" class="btn" (click)="loadScan(scan)"><fa-icon [icon]="faDownload"></fa-icon></button></td>
+    </tr>
+  </tbody>
+</table>

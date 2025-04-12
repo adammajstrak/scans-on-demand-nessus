@@ -117,7 +117,13 @@ namespace ScansOnDemandNessus.Server.Services
 
             string token = GetClient().Post(AppSettings.AddressBase + "/scans/" + id + "/export", body).MapExportResponse();
 
-            string file = GetClient().Get(AppSettings.AddressBase + "/tokens/" + token + "/download");
+            string file = string.Empty;
+
+            do
+            {
+                file = GetClient().Get(AppSettings.AddressBase + "/tokens/" + token + "/download");
+            } while (file.Contains("The download is not ready yet"));
+
 
             return file.MapResultResponse();
         }

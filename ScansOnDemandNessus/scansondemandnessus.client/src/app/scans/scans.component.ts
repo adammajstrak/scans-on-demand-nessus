@@ -20,7 +20,6 @@ export class ScansComponent {
     private baseUrl: string,
     private toastr: ToastrService
   ) {
-    console.log(this.baseUrl)
     this.getAllScans();
     this.getAllHosts();
   }

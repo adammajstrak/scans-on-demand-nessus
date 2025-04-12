@@ -24,11 +24,6 @@ export class SettingsComponent {
   }
 
   public save() {
-    console.log(this.host);
-    console.log(this.login);
-    console.log(this.password);
-    console.log(this.plugins.filter(x => x.checked).map(x => x.name));
-
     const mappedPlugins: { [key: string]: Status } = {};
 
     this.plugins.forEach(plugin => {

@@ -94,7 +94,8 @@ namespace ScansOnDemandNessus.Server.Services
         {
             using (var conn = new SqlConnection(Settings.AppSettings.DatabaseConnectionString))
             {
-                return conn.Query<ScanParameters>("SELECT [HostName], [Login], [Password], [Plugins] FROM [Nessus].[dbo].[ScanSettings] WHERE [HostName] = @hostName", new { hostName }).FirstOrDefault();
+                return conn.Query<ScanParameters>("SELECT [HostName], [Login], [Password], [Plugins] " +
+                    "FROM [Nessus].[dbo].[ScanSettings] WHERE [HostName] = @hostName", new { hostName }).FirstOrDefault();
             }
         }
     }

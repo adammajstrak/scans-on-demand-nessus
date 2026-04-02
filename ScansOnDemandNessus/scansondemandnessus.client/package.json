@@ -21,8 +21,6 @@
     "@angular/platform-browser": "^20.3.18",
     "@angular/platform-browser-dynamic": "^20.3.18",
     "@angular/router": "^20.3.18",
-    "@fortawesome/angular-fontawesome": "^1.0.0",
-    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "bootstrap": "^5.3.5",
     "jest-editor-support": "*",
     "ngx-toastr": "^19.0.0",

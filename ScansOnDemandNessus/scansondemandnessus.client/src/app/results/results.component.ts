@@ -1,7 +1,6 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-results',
@@ -10,7 +9,6 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   standalone: false
 })
 export class ResultsComponent {
-  faTrash = faTrash;
 
   constructor(
     private http: HttpClient, @Inject('BASE_URL')

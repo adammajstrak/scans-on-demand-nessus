@@ -1,6 +1,5 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -10,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
   standalone: false
 })
 export class ScansComponent {
-  faDownload = faDownload;
   public scans: Scan[] = [];
   public hosts: string[] = [];
   public selectedHost: string = '';

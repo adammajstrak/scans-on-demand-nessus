@@ -1,6 +1,6 @@
 <h1 id="tableLabel">Results</h1>
 
-@if (!results?.length) {
+@if (!results.length) {
   <p><em>-</em></p>
 }
 
@@ -26,7 +26,7 @@
           <td>{{ result.scanDate }}</td>
           <td class="output-column">{{ result.output }}</td>
           <td>{{ result.severity }}</td>
-          <td><button class="btn" (click)="delete(result)"><fa-icon [icon]="faTrash"></fa-icon></button></td>
+          <td><button class="btn" (click)="delete(result)"><i class="fa-solid fa-trash"></i></button></td>
         </tr>
       }
     </tbody>

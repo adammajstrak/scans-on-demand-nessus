@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component'; // Importuj 
 import { ResultsComponent } from './results/results.component';
 import { ScansComponent } from './scans/scans.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from '@angular/router';
@@ -24,7 +23,6 @@ import { SettingsComponent } from './settings/settings.component';
   ],
   imports: [
     BrowserAnimationsModule,
-    FontAwesomeModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

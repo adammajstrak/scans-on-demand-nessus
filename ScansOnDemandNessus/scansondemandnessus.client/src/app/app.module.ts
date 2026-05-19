@@ -1,10 +1,10 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component'; // Importuj 
+import { NavMenuComponent } from './nav-menu/nav-menu.component'; // Importuj
 import { ResultsComponent } from './results/results.component';
 import { ScansComponent } from './scans/scans.component';
 import { FormsModule } from '@angular/forms';
@@ -35,7 +35,7 @@ import { SettingsComponent } from './settings/settings.component';
   ],
   providers: [
     { provide: 'BASE_URL', useValue: environment.baseUrl },
-    provideHttpClient()
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })

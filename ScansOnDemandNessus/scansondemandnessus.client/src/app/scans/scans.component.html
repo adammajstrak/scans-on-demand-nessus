@@ -11,30 +11,23 @@
   <button type="button" class="btn btn-primary create-button" (click)="runScheduledScans()">Run scheduled scan</button>
 </div>
 
-
-@if (!scans.length) {
-  <p><em>-</em></p>
-}
-
-@if (scans.length) {
-  <table class='table table-striped' aria-labelledby="tableLabel">
-    <thead>
+<table class='table table-striped' aria-labelledby="tableLabel">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (scan of scans; track scan.id) {
       <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Status</th>
-        <th>Action</th>
+        <td>{{ scan.id }}</td>
+        <td>{{ scan.name }}</td>
+        <td>{{ scan.status }}</td>
+        <td><button [disabled]="scan.status != 'completed' || !canDownload" class="btn" (click)="loadScan(scan)"><i class="fa-solid fa-download"></i></button></td>
       </tr>
-    </thead>
-    <tbody>
-      @for (scan of scans; track scan) {
-        <tr>
-          <td>{{ scan.id }}</td>
-          <td>{{ scan.name }}</td>
-          <td>{{ scan.status }}</td>
-          <td><button [disabled]="scan.status != 'completed' || !canDownload" class="btn" (click)="loadScan(scan)"><i class="fa-solid fa-download"></i></button></td>
-        </tr>
-      }
-    </tbody>
-  </table>
-}
+    }
+  </tbody>
+</table>

@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
@@ -31,8 +31,11 @@ export class ScansComponent {
 
   private getAllScans() {
     this.http.get<Scan[]>(this.baseUrl + 'nessus/scans').subscribe({
-      next: result => this.scans = result,
-      error: err => this.toastr.error('Error'),
+      next: result => {
+        this.scans = result;
+        console.log(result);
+      },
+      error: () => this.toastr.error('Error'),
     });
   }
 
@@ -92,7 +95,7 @@ export class ScansComponent {
     this.canDownload = false;
     this.http.post(this.baseUrl + 'nessus/scans/load', scan).subscribe({
       next: () => this.toastr.success('Scan downloaded', 'Success'),
-      error: err => this.toastr.error('Error'),
+      error: () => this.toastr.error('Error'),
       complete: () => {
          this.canDownload = true;
       },

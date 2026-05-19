@@ -78,13 +78,17 @@
               "buildTarget": "scansondemandnessus.client:build:production"
             },
             "development": {
-              "buildTarget": "scansondemandnessus.client:build:development"
+              "buildTarget": "scansondemandnessus.client:build:development",
+              "hmr": false,
+              "liveReload": false
             }
           },
           "defaultConfiguration": "development",
           "options": {
             "proxyConfig": "src/proxy.conf.js",
-            "port": 53459
+            "port": 53459,
+            "liveReload": false,
+            "hmr": false
           }
         },
         "extract-i18n": {

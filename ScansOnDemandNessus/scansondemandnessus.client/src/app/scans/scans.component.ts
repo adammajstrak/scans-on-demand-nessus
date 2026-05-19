@@ -25,16 +25,9 @@ export class ScansComponent {
   canCreateScan: boolean = true;
   canDownload: boolean = true;
 
-  public selectHost(host: string) {
-    this.selectedHost = host;
-  }
-
   private getAllScans() {
     this.http.get<Scan[]>(this.baseUrl + 'nessus/scans').subscribe({
-      next: result => {
-        this.scans = result;
-        console.log(result);
-      },
+      next: result => this.scans = result,
       error: () => this.toastr.error('Error'),
     });
   }
